@@ -1,0 +1,12 @@
+[submodule "submodules/OpenCOOD"]
+	path = submodules/OpenCOOD
+	url = git@github.com:zhumorui/OpenCOOD.git
+	branch = main
+
+[submodule "submodules/nuscenes-devkit"]
+    path = submodules/nuscenes-devkit
+    url = git@github.com:zhumorui/nuscenes-devkit.git
+	branch = main
+[submodule "Bench2DriveZoo"]
+	path = Bench2DriveZoo
+	url = https://github.com/Yongqi7/Bench2DriveZoo.git

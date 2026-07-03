@@ -1,0 +1,262 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "create data debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/create_data.py",
+            "console": "integratedTerminal",
+            "args": [
+                // "openv2v_4_cams",
+                // "--root-path", "./data/openv2v_4_cams",
+                // "--out-dir", "./data/infos_mini",
+                // "--extra-tag", "openv2v_4_cams",
+                // "--version", "v1.0-mini",
+                // "--canbus", "./data/openv2v_4_cams"
+                "openv2v_4_cams",
+                "--root-path", "./data/m3cad_carla_ue5",
+                "--out-dir", "./data/infos",
+                "--extra-tag", "m3cad_carla_ue5",
+                "--version", "v1.0-mini",
+                "--canbus", "./data/m3cad_carla_ue5"
+            ]
+        },
+        {
+            "name": "dataset_statistic",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/dataset_statistic.py",
+            "console": "integratedTerminal",
+            "args": [
+                "./projects/configs/stage1_track/base_track.py",
+            ],
+            "justMyCode": false,
+        },
+        {
+            "name": "training track debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/train.py",
+            "console": "integratedTerminal",
+            "args": [
+                "./projects/configs/stage1_track/base_track.py",
+                "--gpus", "1",
+            ],
+            "justMyCode": false,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            }
+        },
+        {
+            "name": "training submodule fusion track debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/train.py",
+            "console": "integratedTerminal",
+            "args": [
+                "./projects/configs/submodule_fusion/submodules_cooper_track.py",
+                "--gpus", "1",
+            ],
+            "justMyCode": false,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "3",
+                "PYTHONPATH": "${workspaceFolder}/../tools/Bench2DriveZoo:${env:PYTHONPATH}",
+            }
+        },
+        {
+            "name": "training submodule fusion track_map debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/train.py",
+            "console": "integratedTerminal",
+            "args": [
+                "./projects/configs/submodule_fusion/submodules_cooper_track_map.py",
+                "--gpus", "1",
+            ],
+            "justMyCode": false,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0",
+                "TMPDIR": "/mnt/DATA/tmp/$USER",
+                "PYTHONPATH": "${workspaceFolder}/../tools/Bench2DriveZoo:${env:PYTHONPATH}",
+            }
+        },
+        {
+            "name": "eval submodule fusion track debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "torch.distributed.launch",
+            "console": "integratedTerminal",
+            "args": [
+                "--nproc_per_node=1",
+                "--master_port=29500",
+                "tools/test.py",
+                "./projects/configs/submodule_fusion/submodules_e2e.py",
+                "./ckpts/epoch_18_ref_pts_in_track_e2e.pth",
+                "--launcher", "pytorch",
+                "--out", "output/results_ref_pts_in_track_e2e.pkl",
+                "--eval", "bbox"
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            }
+        }, 
+        {
+            "name": "eval submodule fusion track map debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "torch.distributed.launch",
+            "console": "integratedTerminal",
+            "args": [
+                "--nproc_per_node=1",
+                "--master_port=29500",
+                "tools/test.py",
+                "./projects/configs/submodule_fusion/submodules_cooper_track_map.py",
+                "./ckpts/epoch_6_track_fusion_ue5_full.pth",
+                "--launcher", "pytorch",
+                "--out", "output/results_track_fusion_map.pkl",
+                "--eval", "bbox"
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            }
+        },
+        {
+            "name": "eval submodule fusion e2e debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "torch.distributed.launch",
+            "console": "integratedTerminal",
+            "args": [
+                "--nproc_per_node=1",
+                "--master_port=29500",
+                "tools/test.py",
+                "./projects/configs/submodule_fusion/submodules_e2e.py",
+                "./ckpts/epoch_18_track_fusion_e2e.pth",
+                "--launcher", "pytorch",
+                "--out", "output/results_ref_pts_fusion.pkl",
+                "--eval", "bbox"
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "0"
+            }
+        },          
+        {
+            "name": "training cooper track debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/train.py",
+            "console": "integratedTerminal",
+            "args": [
+                "./projects/configs/stage1_track_cooper/base_track.py",
+                "--gpus", "1",
+            ],
+            "justMyCode": false,
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "3"
+            }
+        },
+        {
+            "name": "train track_map debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/train.py",
+            "console": "integratedTerminal",
+            "args": [
+                "./projects/configs/stage1_track_map/base_track_map.py",
+                "--gpus", "1",
+            ]
+        },
+        {
+            "name": "train cooper track_map debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/train.py",
+            "console": "integratedTerminal",
+            "args": [
+                "./projects/configs/stage1_cooper_track_map/base_track_map.py",
+                "--gpus", "1",
+            ],
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "2"
+            }
+        },
+        {
+            "name": "train_stage2_e2e debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/train.py",
+            "console": "integratedTerminal",
+            "args": [
+                "./projects/configs/stage2_e2e/base_e2e.py",
+                "--gpus", "1",
+            ]
+
+        },
+        {
+            "name": "eval_track debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/test.py",
+            "console": "integratedTerminal",
+            "args": [
+                "./projects/configs/stage1_track_cooper/submodules_cooper_track.py",
+                //"ckpts/epoch_6_track_fusion_ue5_full.pth",
+                "ckpts/uniad_base_e2e.pth",
+                "--out", "output/results_uniad_base.pkl",
+                "--eval", "bbox",
+
+            ]
+        },
+        {
+            "name": "2_eval submodule fusion track debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "/bin/bash",
+            //"program": "${workspaceFolder}/tools/uniad_dist_eval.sh",
+            "console": "integratedTerminal",
+            "args": [
+                "${workspaceFolder}/tools/uniad_dist_eval.sh",
+                "./projects/configs/stage1_track_cooper/submodules_cooper_track.py",
+                "./ckpts/stage1_track_cooper.pth",
+                "1"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}/../tools/Bench2DriveZoo:${env:PYTHONPATH}",
+                "CUDA_VISIBLE_DEVICES": "3"
+            }
+        },        
+        {
+            "name": "visualize debugger",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/analysis_tools/visualize/run.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--predroot", "output/results_ref_pts_fusion_in_track_e2e.pkl",
+                "--out_folder", "./output/ref_pts_fusion_in_track_e2e",
+                "--demo_video", "output_video_ref_pts_fusion_in_track_e2e.avi",
+                "--project_to_cam", // optional parameter (action: store_true)
+            ]
+        },
+        {
+            "name": "Rerun cooper_uniad visualization",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/scripts/cooper_uniad_visualization.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--root-dir", "./data/openv2v_4_cams",
+                "--scene-name",
+                "2021_08_23_16_06_26_243",
+                "2021_08_23_16_06_26_252",
+                "2021_08_23_16_06_26_261",
+                "--predroot", "output_cooper_gt_fusion_large/results.pkl",
+                "--serve"
+            ]
+        }
+    ]
+}
