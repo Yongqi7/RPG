@@ -3,8 +3,8 @@
 ## Evaluation Example <a name="example"></a>
 Please make sure you have prepared the environment and the nuScenes dataset. You can check it by simply evaluating the pre-trained first-stage(track_map) model as follows:
 ```shell
-cd UniAD
-./tools/uniad_dist_eval.sh ./projects/configs/stage1_track_map/base_track_map.py ./ckpts/uniad_base_track_map.pth 8
+cd RPG
+./tools/uniad_dist_eval.sh ./projects/configs/submodule_fusion/submodules_e2e.py ./ckpts/RPG_e2e.pth 2
 
 # For slurm users:
 # ./tools/uniad_slurm_eval.sh YOUR_PARTITION ./projects/configs/stage1_track_map/base_track_map.py ./ckpts/uniad_base_track_map.pth 8
@@ -13,14 +13,14 @@ If everything is prepared properly, the output results should be:
 
 ```
 Aggregated results: 
-AMOTA	0.390 
-AMOTP	1.300
-RECALL	0.489
+AMOTA	0.706 
+AMOTP	0.700
+RECALL	0.776
 ```
 
-**Note**: If you evaluate with different number of GPUs rather than 8, the results might be slightly different.
 
-## GPU Requirements <a name="gpu"></a>
+
+
 
 `How to run UniAD lightweight, say just two 3090s at an affordable cost, is definitely an incoming feature. Stay tuned!`
 
@@ -50,7 +50,7 @@ The second-stage training takes ~ 17 GB GPU memory, ~ 4 days for 20 epochs on 8 
 ### Training Command
 ```shell
 # N_GPUS is the number of GPUs used. Recommended >=8.
-./tools/uniad_dist_train.sh ./projects/configs/stage1_track_map/base_track_map.py N_GPUS
+./tools/uniad_dist_train.sh ./projects/configs/submodule_fusion/submodules_e2e.py N_GPUS
 
 # For slurm users:
 # ./tools/uniad_slurm_train.sh YOUR_PARTITION ./projects/configs/stage1_track_map/base_track_map.py N_GPUS
@@ -64,7 +64,7 @@ The second-stage training takes ~ 17 GB GPU memory, ~ 4 days for 20 epochs on 8 
 # N_GPUS is the number of GPUs used.  Recommended =8.
 # If you evaluate with different number of GPUs rather than 8, the results might be slightly different.
 
-./tools/uniad_dist_eval.sh ./projects/configs/stage1_track_map/base_track_map.py /PATH/TO/YOUR/CKPT.pth N_GPUS
+./tools/uniad_dist_eval.sh ./projects/configs/submodule_fusion/submodules_e2e.py  /PATH/TO/YOUR/CKPT.pth N_GPUS
 
 # For slurm users:
 # ./tools/uniad_slurm_eval.sh YOUR_PARTITION ./projects/configs/stage1_track_map/base_track_map.py /PATH/TO/YOUR/CKPT.pth N_GPUS
