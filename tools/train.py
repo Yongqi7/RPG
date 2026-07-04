@@ -21,8 +21,6 @@ from adzoo.uniad.test_utils import custom_multi_gpu_test
 from custom_hooks.set_epoch_hook import SetEpochHook
 
 import sys
-sys.path.append('/home/UNT/yz0364/cooper_uniad')
-
 warnings.filterwarnings("ignore")
 
 def parse_args():
