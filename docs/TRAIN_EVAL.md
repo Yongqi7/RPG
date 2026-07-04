@@ -19,22 +19,6 @@ RECALL	0.776
 ```
 
 
-
-
-
-`How to run UniAD lightweight, say just two 3090s at an affordable cost, is definitely an incoming feature. Stay tuned!`
-
-UniAD is trained in two stages. The first stage is to train the perception modules (e.g., track and map), and the second stage initializes the weights trained from last stage and optimizes all task modules together. It's recommended to use at least 8 GPUs for training in both two stages. Training with fewer GPUs is fine but would cost more time.
-
-The first-stage training takes ~ 50 GB GPU memory, ~ 2 days for 6 epochs on 8 A100 GPUs.
-* **HINT**: To save GPU memory, you can change `queue_length=5` to `3` which will slightly degrade the tracking performance. Then the training would take ~30 GB GPU memory and is affordable for `V100 GPUs (32GB version)`.
-
-The second-stage training takes ~ 17 GB GPU memory, ~ 4 days for 20 epochs on 8 A100 GPUs.
-* **NOTE**: Compared to the first-stage, much less GPU memory is required because we freeze the BEV encoder in this stage to focus on learning task-specific queries. Due to this, you can run the second-stage training on `V100 or 3090` devices.
-
-
-
-
 ##  Train <a name="train"></a>
 
 <!-- ### GPU Requirements <a name="gpu"></a>
